@@ -1,9 +1,7 @@
-%   Pnet2= 0 - 2; 
-%   Qnet2 = 0 - 1;
+clear xe J 
 
-clear xe J
-zl = 0.15 + 1i*0.1; 
-yl = 1/zl;
+zl = 0.15 + 1i*0.1; % Line impedence
+yl = 1/zl; % Line admittance
 
 G11 = real(yl); 
 G12 = -real(yl); 
