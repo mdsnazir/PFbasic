@@ -17,36 +17,36 @@ x0 = [0 1]';
 xe = x0;
 iter = 1;
 
+% NR iterations
 while (iter <10)
     
-theta2 = xe(1); 
-v2 = xe(2);
+    theta2 = xe(1); 
+    v2 = xe(2);
 
 
-fp = G21*v2*cos(theta2) + B21*v2*sin(theta2) + G22*v2*v2 - Pnet2 ;
-fq = G21*v2*sin(theta2) - B21*v2*cos(theta2) - B22*v2*v2 - Qnet2 ; 
+    fp = G21*v2*cos(theta2) + B21*v2*sin(theta2) + G22*v2*v2 - Pnet2 ;
+    fq = G21*v2*sin(theta2) - B21*v2*cos(theta2) - B22*v2*v2 - Qnet2 ; 
 
 
-fx = [fp fq]';
+    fx = [fp fq]';
 
-J11 = -G21*v2*sin(theta2)+ B21*v2*cos(theta2) ;
-J12 = G21*cos(theta2) + B21*sin(theta2) + 2*G22*v2; 
-J21 = G21*v2*cos(theta2) + B21*v2*sin(theta2); 
-J22 = G21*sin(theta2) - B21*cos(theta2) - 2*B22*v2; 
+    % PF Jacobian
+    J11 = -G21*v2*sin(theta2)+ B21*v2*cos(theta2) ;
+    J12 = G21*cos(theta2) + B21*sin(theta2) + 2*G22*v2; 
+    J21 = G21*v2*cos(theta2) + B21*v2*sin(theta2); 
+    J22 = G21*sin(theta2) - B21*cos(theta2) - 2*B22*v2; 
 
-J = [J11 J12
-    J21 J22 ] ;
+    J = [J11 J12
+        J21 J22 ] ;
 
+    xe = xe - J\fx ; 
 
-xe = xe - J\fx ; 
-
-
-if iter>1
-fxr = fx - fxn;  
-if max(abs(fxr))< .000001
-   % iter
-    break
-end
+    if iter>1
+    fxr = fx - fxn;  
+    if max(abs(fxr))< .000001
+       % iter
+        break
+    end
 end 
 
 
