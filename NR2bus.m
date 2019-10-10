@@ -28,9 +28,7 @@ fq = G21*v2*sin(theta2) - B21*v2*cos(theta2) - B22*v2*v2 - Qnet2 ;
 
 
 fx = [fp fq]';
-% if iter>1
-%     fxe = fx - fxn;
-% end
+
 J11 = -G21*v2*sin(theta2)+ B21*v2*cos(theta2) ;
 J12 = G21*cos(theta2) + B21*sin(theta2) + 2*G22*v2; 
 J21 = G21*v2*cos(theta2) + B21*v2*sin(theta2); 
@@ -42,14 +40,6 @@ J = [J11 J12
 
 xe = xe - J\fx ; 
 
-
-% if iter>1
-% xr = xe - xn;  
-% if max(abs(xr))< .000001
-%     iter
-%     break
-% end
-% end
 
 if iter>1
 fxr = fx - fxn;  
@@ -67,4 +57,4 @@ iter = iter+1;
 
 end
 
-%xe
+
